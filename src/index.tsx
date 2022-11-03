@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/base.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -10,6 +10,7 @@ import Welcome from "./modules/welcome/Welcome";
 import Auth from "./modules/auth/Auth";
 import Registration from "./modules/registration/Registration";
 import Schedule from "./modules/schedule/Schedule";
+import {ApplicationPathEnum} from "./models/ui/enum/ApplicationPathEnum";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -25,25 +26,25 @@ const router = createBrowserRouter([
                 element: <Welcome />
             },
             {
-                path: "auth",
+                path: ApplicationPathEnum.AUTH,
                 element: <Auth />,
                 children: [
                     {
-                        path: "login",
+                        path: ApplicationPathEnum.LOGIN,
                         element: <Login />
                     },
                     {
-                        path: "signin",
+                        path: ApplicationPathEnum.SiGNIN,
                         element: <SignIn />
                     }
                 ]
             },
             {
-                path: "registration",
+                path: ApplicationPathEnum.REGISTRATION,
                 element: <Registration />
             },
             {
-                path: "schedule",
+                path: ApplicationPathEnum.SCHEDULE,
                 element: <Schedule />
             }
 
