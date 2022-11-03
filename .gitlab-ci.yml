@@ -13,11 +13,11 @@ build:
     - docker build  . -t hobbit-dev
     - docker images
   only:
-    - master
-    - develop
-    - /^feature\/.*$/
+#    - master
+    - develops
+#    - /^feature\/.*$/
 #    - /^hotfix\/.*$/
-    - /^release\/.*$/
+#    - /^release\/.*$/
   tags:
     - skrzat-dev
 
@@ -27,10 +27,10 @@ deploy:
         - docker compose -f docker-compose.prod.yml up -d
         - docker ps
     only:
-        - master
+#        - master
         - develop
-        - /^feature\/.*$/
-        - /^hotfix\/.*$/
-        - /^release\/.*$/
+#        - /^feature\/.*$/
+#        - /^hotfix\/.*$/
+#        - /^release\/.*$/
     tags:
       - skrzat-dev
