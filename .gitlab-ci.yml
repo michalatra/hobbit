@@ -1,0 +1,32 @@
+before_script:
+  - docker info
+
+stages:
+#  - static-anlisys
+  - build
+#  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - docker build  . -t hobbit-dev
+    - docker images
+  only:
+    - master
+    - develop
+    - /^feature\/.*$/
+    - /^hotfix\/.*$/
+    - /^release\/.*$/
+
+deploy:
+    stage: deploy
+    script:
+        - docker compose -f docker-compose.prod.yml up -d
+        - docker ps
+    only:
+        - master
+        - develop
+        - /^feature\/.*$/
+        - /^hotfix\/.*$/
+        - /^release\/.*$/
