@@ -16,7 +16,7 @@ build:
     - master
     - develop
     - /^feature\/.*$/
-    - /^hotfix\/.*$/
+#    - /^hotfix\/.*$/
     - /^release\/.*$/
 
 deploy:
