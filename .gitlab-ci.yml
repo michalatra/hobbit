@@ -18,6 +18,8 @@ build:
     - /^feature\/.*$/
 #    - /^hotfix\/.*$/
     - /^release\/.*$/
+  tags:
+    - skrzat-dev
 
 deploy:
     stage: deploy
@@ -30,3 +32,5 @@ deploy:
         - /^feature\/.*$/
         - /^hotfix\/.*$/
         - /^release\/.*$/
+    tags:
+      - skrzat-dev
