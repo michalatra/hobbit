@@ -14,7 +14,7 @@ build:
     - docker images
   only:
 #    - master
-    - develops
+    - develop
 #    - /^feature\/.*$/
 #    - /^hotfix\/.*$/
 #    - /^release\/.*$/
