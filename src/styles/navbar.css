@@ -8,22 +8,26 @@
     align-items: center;
     justify-content: space-between;
     background-color: var(--color-background-dark);
-    padding: 1rem;
-    margin: 1rem;
+    padding: 0.6rem;
 }
 
-.app__navbar__content, .app__navbar__content__logged {
+.app__navbar__icon {
+    padding: 0.4rem;
+}
+
+.app__navbar__content, .app__navbar__content--logged {
     display: flex;
     flex-grow: 1;
     flex-direction: row;
     align-items: center;
+    padding: 0 0.5rem;
 }
 
 .app__navbar__content {
     justify-content: flex-end;
 }
 
-.app__navbar__content__logged {
+.app__navbar__content--logged {
     justify-content: space-between;
 }
 
@@ -41,7 +45,6 @@
     border-radius: var(--border-radius);
     border-width: 3px;
     border-style: solid;
-    transition: 150ms;
 }
 
 .app__navbar__link {
@@ -65,5 +68,25 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+}
+
+.app__navbar__identity:hover {
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-grey);
+}
+
+.app__navbar__identity__name {
+    font-size: 0.9rem;
+    color: var(--color-white);
+    font-weight: bold;
+    margin: 0.1rem;
+}
+
+.app__navbar__identity__email {
+    font-size: 0.8rem;
+    color: var(--color-lightgrey);
+    margin: 0.1rem;
 }
