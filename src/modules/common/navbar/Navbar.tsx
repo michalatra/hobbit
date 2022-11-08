@@ -8,8 +8,10 @@ import {loginState$} from "../../../services/AuthService";
 import {LoginStateEnum} from "../../../models/ui/enum/LoginStateEnum";
 import Container from "../container/Container";
 
+const [useLoginState] = bind(loginState$);
+
 const Navbar = () => {
-    const [useLoginState] = bind(loginState$);
+    const loginState = useLoginState();
 
     return (
         <Container>
@@ -18,8 +20,8 @@ const Navbar = () => {
                 <div className={
                     useLoginState() === LoginStateEnum.USER_LOGGED ? "app__navbar__content--logged" : 'app__navbar__content'
                 }>
-                    <NavbarLinks loginState={useLoginState()} />
-                    <NavbarIdentity loginState={useLoginState()} />
+                    <NavbarLinks loginState={loginState} />
+                    <NavbarIdentity loginState={loginState} />
                 </div>
             </div>
         </Container>

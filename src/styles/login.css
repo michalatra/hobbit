@@ -16,3 +16,35 @@
     border-radius: var(--border-radius);
     padding: 1rem;
 }
+
+.app__login-card__left-pane {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.app__login-card__right-pane {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.app__login-card__header {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .app__login-card__left-pane {
+        display: none;
+    }
+}

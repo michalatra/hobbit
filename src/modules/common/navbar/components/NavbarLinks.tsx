@@ -5,7 +5,7 @@ import {PropsBase} from "../../../../models/ui/data/PropsBase";
 
 const NavbarLinks = ({loginState}: PropsBase) => {
     return <div className="app__navbar__links">
-        {getLinks(loginState!).map(link => <NavbarLink link={link} />)}
+        {getLinks(loginState!).map(link => <NavbarLink key={link.name} link={link} />)}
     </div>
 }
 
