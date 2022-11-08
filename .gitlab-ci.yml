@@ -24,7 +24,7 @@ build:
 deploy:
     stage: deploy
     script:
-        - docker compose -f docker-compose.prod.yml up -d
+        - docker compose -f docker-compose.prod.yml up -d --build
         - docker ps
     only:
 #        - master
