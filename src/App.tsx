@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import Navbar from "./modules/common/navbar/Navbar";
+import ContentContainer from "./modules/common/contentContainer/ContentContainer";
+import {Outlet, useNavigate} from "react-router-dom";
+import {Subscribe} from "@react-rxjs/core";
+import GlobalContainer from "./modules/common/globalContainer/GlobalContainer";
+import {navigateEvent$} from "./services/NavigationService";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const subscription = navigateEvent$
+        .subscribe(path => navigate(path));
+
+    return () => subscription.unsubscribe();
+  }, [])
+
+  return <React.Fragment>
+    <Subscribe>
+      <GlobalContainer>
+        <Navbar />
+        <ContentContainer>
+          <Outlet />
+        </ContentContainer>
+      </GlobalContainer>
+    </Subscribe>
+  </React.Fragment>
 }
 
 export default App;

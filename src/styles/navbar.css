@@ -1,0 +1,92 @@
+@import "base.css";
+
+/* Navbar */
+.app__navbar {
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-background-dark);
+    padding: 0.6rem;
+}
+
+.app__navbar__icon {
+    padding: 0.4rem;
+}
+
+.app__navbar__content, .app__navbar__content--logged {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.app__navbar__content {
+    justify-content: flex-end;
+}
+
+.app__navbar__content--logged {
+    justify-content: space-between;
+}
+
+.app__navbar__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.app__navbar__link, .app__navbar__link--active {
+    font-size: 1rem;
+    margin: 0 0.3rem;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    border-width: 3px;
+    border-style: solid;
+}
+
+.app__navbar__link {
+    color: var(--color-lightgrey);
+    border-color: transparent;
+}
+
+.app__navbar__link:hover {
+    background-color: var(--color-grey);
+    color: var(--color-white);
+    border-color: var(--color-grey);
+}
+
+.app__navbar__link--active {
+    background-color: var(--color-primary);
+    font-weight: bold;
+    border-color: var(--color-background-black);;
+}
+
+.app__navbar__identity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+}
+
+.app__navbar__identity:hover {
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-grey);
+}
+
+.app__navbar__identity__name {
+    font-size: 0.9rem;
+    color: var(--color-white);
+    font-weight: bold;
+    margin: 0.1rem;
+}
+
+.app__navbar__identity__email {
+    font-size: 0.8rem;
+    color: var(--color-lightgrey);
+    margin: 0.1rem;
+}
