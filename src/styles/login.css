@@ -44,7 +44,22 @@
 }
 
 @media screen and (max-width: 768px) {
+
+    .app__login {
+        width: 100%;
+    }
+
+    .app__login-card {
+        padding: 0.5rem;
+        width: 100%;
+    }
+
     .app__login-card__left-pane {
         display: none;
+    }
+
+    .app__login-card__right-pane {
+        padding: 0;
+        width: 100%;
     }
 }
