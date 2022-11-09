@@ -6,7 +6,7 @@ import {InputTypeEnum} from "../../../models/ui/enum/InputTypeEnum";
 import {DataTypeEnum} from "../../../models/ui/enum/DataTypeEnum";
 import {requiredValidator} from "../../../validators/RequiredValidator";
 import {ButtonTypeEnum} from "../../../models/ui/enum/ButtonTypeEnum";
-import {handleLogin, handleSignIn} from "../../../services/AuthService";
+import {handleSignIn} from "../../../services/AuthService";
 import Form from "../../common/form/Form";
 
 const formData: FormData = {

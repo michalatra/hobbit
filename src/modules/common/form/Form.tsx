@@ -4,8 +4,8 @@ import {FormData} from "../../../models/ui/data/FormData";
 import Input from "./input/Input";
 import Button from "../button/Button";
 import "../../../styles/form.css"
-import {InputFieldData} from "../../../models/ui/data/InputFieldData";
 import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
+import {createFormState, createFormValidationState} from "../../../utils/FormUtil";
 
 interface FormProps extends PropsBase {
     formData: FormData;
@@ -111,22 +111,6 @@ const Form = ({formData}: FormProps) => {
     </div>
 }
 
-const createFormState = (inputData: InputFieldData[]) => {
-    const formState: any = {};
 
-    for (let input of inputData)
-        formState[input.name] = input.dataType
-
-    return formState;
-}
-
-const createFormValidationState = (inputData: InputFieldData[]) => {
-    const formValidationState: any = {};
-
-    for (let input of inputData)
-        formValidationState[input.name] = {isValid: true, error: "none"}
-
-    return formValidationState;
-}
 
 export default Form;

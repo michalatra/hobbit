@@ -27,7 +27,7 @@ const Input = ({inputData, validationData, value, onChange}: InputProps) => {
 }
 
 const getInputErrorClasses = (isValid: boolean): string => {
-    return "app__input__error-message"
+    return "app__input__error-message "
         + (isValid ? "app__input__error-message--hidden " : "");
 }
 

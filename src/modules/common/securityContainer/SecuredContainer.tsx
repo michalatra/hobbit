@@ -15,7 +15,7 @@ const SecuredContainer = ({children}: PropsBase) => {
     useEffect(() => {
         if (loginState === LoginStateEnum.USER_NOT_LOGGED)
             navigate("/" + ApplicationPathEnum.AUTH + "/" + ApplicationPathEnum.LOGIN);
-    }, [loginState])
+    }, [loginState, navigate])
 
     return <React.Fragment>{children}</React.Fragment>
 }
