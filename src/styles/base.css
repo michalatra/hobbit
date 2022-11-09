@@ -76,7 +76,7 @@ p {
     flex-grow: 1;
     overflow: auto;
     display: flex;
-    align-content: stretch;
+    position: relative;
 }
 
 .app__container, .app__container--grow {
@@ -85,8 +85,11 @@ p {
 }
 
 .app__container--grow {
-    display: flex;
+    display: block;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
 }
 
 .grid {
@@ -107,6 +110,12 @@ p {
 
 .grid-cols-1-2 {
     grid-template-columns: 66.7fr 33.3fr;
+}
+
+@media screen and (max-width: 768px) {
+    .app__container, .app__container--grow {
+        margin: 0.4rem;
+    }
 }
 
 
@@ -235,6 +244,16 @@ input[type="number"].app__input__error::placeholder {
     padding: 0.3rem 0 0 0 ;
 }
 
+.app__input__error-message:after {
+    content: "";
+    display: inline-block;
+    width: 0;
+}
+
+.app__input__error--message-hidden {
+    color: transparent;
+}
+
 label {
     color: var(--color-lightgrey);
     font-size: 0.8rem;
@@ -248,7 +267,7 @@ label {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 0.6rem 0;
+    padding: 0.2rem 0;
 }
 
 /* Buttons */

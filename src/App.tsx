@@ -14,7 +14,7 @@ const App = () => {
         .subscribe(path => navigate(path));
 
     return () => subscription.unsubscribe();
-  }, [])
+  }, [navigate])
 
   const calculateVh = () => {
     var vh = window.innerHeight * 0.01;

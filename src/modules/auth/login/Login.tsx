@@ -19,6 +19,7 @@ const formData: FormData = {
             placeholder: "Wprowadź identyfikator",
             type: InputTypeEnum.TEXT,
             dataType: DataTypeEnum.STRING,
+            uiIndex: 0,
             validators: [requiredValidator]
         },
         {
@@ -27,6 +28,7 @@ const formData: FormData = {
             placeholder: "Wprowadź hasło",
             type: InputTypeEnum.PASSWORD,
             dataType: DataTypeEnum.STRING,
+            uiIndex: 1,
             validators: [requiredValidator]
         },
     ]],

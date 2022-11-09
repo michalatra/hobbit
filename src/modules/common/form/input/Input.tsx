@@ -22,8 +22,13 @@ const Input = ({inputData, validationData, value, onChange}: InputProps) => {
             onChange={event => onChange(inputData.name, event.target.value)}
             className={!validationData.isValid ? "app__input__error" : ""}
         />
-        {!validationData.isValid ? <div className="app__input__error-message">{validationData.error}</div> : null}
+        <div className={getInputErrorClasses(validationData.isValid)}>{validationData.error}</div>
     </div>
+}
+
+const getInputErrorClasses = (isValid: boolean): string => {
+    return "app__input__error-message "
+        + (isValid ? "app__input__error-message--hidden " : "");
 }
 
 export default Input;
