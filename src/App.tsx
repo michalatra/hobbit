@@ -16,6 +16,16 @@ const App = () => {
     return () => subscription.unsubscribe();
   }, [])
 
+  const calculateVh = () => {
+    var vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+  }
+
+  calculateVh();
+
+  window.addEventListener('resize', calculateVh);
+  window.addEventListener('orientationchange', calculateVh);
+
   return <React.Fragment>
     <Subscribe>
       <GlobalContainer>

@@ -63,7 +63,7 @@ p {
 
 /* Layout */
 .app__global-container {
-    height: 100vh;
+    height: calc(var(--vh) * 100);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
