@@ -8,5 +8,6 @@ export interface InputFieldData {
     placeholder: string,
     type: InputTypeEnum,
     dataType: DataTypeEnum,
+    uiIndex: number,
     validators?: ValidatorFunction[]
 }

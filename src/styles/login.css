@@ -9,12 +9,19 @@
     justify-content: center;
 }
 
-.app__login-card {
+.app__login-card, .app__signin-card {
     display: flex;
-    flex-direction: row;
     background-color: var(--color-background-dark);
     border-radius: var(--border-radius);
     padding: 1rem;
+}
+
+.app__login-card {
+    flex-direction: row;
+}
+
+.app__signin-card {
+    flex-direction: column;
 }
 
 .app__login-card__left-pane {

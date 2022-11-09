@@ -1,16 +1,19 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {PropsBase} from "../../../models/ui/data/PropsBase";
 import {FormData} from "../../../models/ui/data/FormData";
 import Input from "./input/Input";
 import Button from "../button/Button";
 import "../../../styles/form.css"
 import {InputFieldData} from "../../../models/ui/data/InputFieldData";
+import {useWindowDimensions} from "../../../hooks/useWindowDimensions";
 
 interface FormProps extends PropsBase {
     formData: FormData;
 }
 
 const Form = ({formData}: FormProps) => {
+    const flattenedColumnData = [formData.columnData.flat().sort((inA, inB) => inA.uiIndex - inB.uiIndex)];
+
     const [formState, setFormState] = useState(
         createFormState(formData.columnData.flat())
     );
@@ -18,6 +21,24 @@ const Form = ({formData}: FormProps) => {
     const [formValidationState, setFormValidationState] = useState(
         createFormValidationState(formData.columnData.flat())
     );
+
+    const [responsiveColumnData, setResponsiveColumnData] = useState(formData.columnData);
+    const [columnsFlattened, setColumnsFlattened] = useState(false);
+    const [windowWidth] = useWindowDimensions();
+
+    useEffect(() => {
+        if (windowWidth < 768) {
+            if (!columnsFlattened) {
+                setResponsiveColumnData(flattenedColumnData);
+                setColumnsFlattened(true);
+            }
+        } else {
+            if (columnsFlattened) {
+                setResponsiveColumnData(formData.columnData);
+                setColumnsFlattened(false);
+            }
+        }
+    }, [windowWidth])
 
     const updateFormState = (property: string, value: any) => {
         const state: any = {...formState};
@@ -69,7 +90,7 @@ const Form = ({formData}: FormProps) => {
 
     return <div className="app__form">
         <div className="app__form__grid">
-            {formData.columnData.map(column => (
+            {responsiveColumnData.map(column => (
                 <div key={column[0].name} className="app__form__grid__column">
                     {column.map(input => (
                         <Input
@@ -103,7 +124,7 @@ const createFormValidationState = (inputData: InputFieldData[]) => {
     const formValidationState: any = {};
 
     for (let input of inputData)
-        formValidationState[input.name] = {isValid: true, error: ""}
+        formValidationState[input.name] = {isValid: true, error: "none"}
 
     return formValidationState;
 }
