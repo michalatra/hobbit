@@ -1,0 +1,91 @@
+@import "base.css";
+
+.app__schedule__container {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    min-height: 100%;
+}
+
+.app__schedule__calendar {
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+
+.app__schedule__sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 15rem;
+}
+
+.app__schedule__sidebar-month {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-white);
+}
+
+.app__schedule__sidebar__week-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 0.6rem 0;
+    color: var(--color-lightgrey);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.app__schedule__sidebar__week-range {
+    color: var(--color-primary);
+    font-size: 1rem;
+    margin: 0 0.6rem;
+}
+
+.app__schedule__sidebar__lectures-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    margin-top: 1rem;
+}
+
+.app__schedule__sidebar__lectures-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0.6rem 0;
+}
+
+.app__schedule__sidebar__lecture,
+.app__schedule__sidebar__lecture--disabled {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.6rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.app__schedule__sidebar__lecture:hover,
+.app__schedule__sidebar__lecture--disabled:hover {
+    background-color: var(--color-background-light);
+}
+
+.app__schedule__sidebar__lecture--disabled > .app__schedule__sidebar__lecture-tag,
+.app__schedule__sidebar__lecture--disabled > .app__schedule__sidebar__lecture-name {
+    opacity: 0.6;
+}
+
+.app__schedule__sidebar__lecture-tag {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+}
+
+.app__schedule__sidebar__lecture-name {
+    font-size: 0.85rem;
+    color: var(--color-white);
+    font-weight: 600;
+}
