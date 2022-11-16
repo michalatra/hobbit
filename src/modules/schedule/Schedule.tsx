@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/schedule.css"
 import SecuredContainer from "../common/securityContainer/SecuredContainer";
 import ContainerGrow from "../common/container/ContainerGrow";
-import ScheduleSidebar from "./components/sidenav/ScheduleSidebar";
+import ScheduleSidebar from "./components/sidebar/ScheduleSidebar";
 import ScheduleCalendar from "./components/calendar/ScheduleCalendar";
 
 const Schedule = () => {

@@ -7,7 +7,7 @@ interface HeaderProps extends PropsBase {
     schedule: ScheduleDateData
 }
 
-const SidenavHeader = ({schedule}: HeaderProps) => {
+const SidebarHeader = ({schedule}: HeaderProps) => {
     return <div>
         <div className="app__schedule__sidebar-month">{convertMonthName(schedule.month)}</div>
         <div className="app__schedule__sidebar__week-container">
@@ -19,4 +19,4 @@ const SidenavHeader = ({schedule}: HeaderProps) => {
     </div>
 }
 
-export default SidenavHeader;
+export default SidebarHeader;

@@ -15,7 +15,8 @@
 .app__schedule__sidebar {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: flex-start;
     min-width: 15rem;
 }
 
@@ -41,14 +42,16 @@
     margin: 0 0.6rem;
 }
 
-.app__schedule__sidebar__lectures-title {
+.app__schedule__sidebar__lectures-title,
+.app__schedule__sidebar__events-title {
     font-size: 1rem;
     font-weight: bold;
     color: var(--color-white);
     margin-top: 1rem;
 }
 
-.app__schedule__sidebar__lectures-list {
+.app__schedule__sidebar__lectures-list,
+.app__schedule__sidebar__events-list {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -88,4 +91,21 @@
     font-size: 0.85rem;
     color: var(--color-white);
     font-weight: 600;
+}
+
+.app__schedule__sidebar-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    padding: 0.6rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.app__schedule__sidebar-footer:hover {
+    background-color: var(--color-background-light);
 }
