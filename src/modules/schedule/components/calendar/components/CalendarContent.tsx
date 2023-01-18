@@ -8,7 +8,6 @@ import {
 import { DayNameConverter } from "../../../../../models/ui/enum/DayNameConverter";
 import { CalendarHourItemData } from "../../../../../models/ui/data/CalendarHourItemData";
 import { CalendarEventData } from "../../../../../models/ui/data/CalendarEventData";
-import { CalendarEventOverlapType } from "../../../../../models/ui/enum/CalendarEventOverlapType";
 
 const hourItems: CalendarHourItemData[] = [
   { hour: 0 },
@@ -37,51 +36,68 @@ const hourItems: CalendarHourItemData[] = [
   { hour: 23 },
 ];
 
-const prepareCalendarEvents = (
-  events: CalendarEventData[],
-  day: Date
-): CalendarEventData[] => {
-  let lastStartedEvent: CalendarEventData | undefined;
+const prepareCalendarEventsV3 = (events: CalendarEventData[], day: Date) => {
+  let overlappingEvents: (CalendarEventData | null)[] = [];
+
   let updatedEvents = [...events];
   updatedEvents = updatedEvents.filter(
     (event) => event.eventStart.getDate() === day.getDate()
   );
   updatedEvents = updatedEvents.sort((a, b) =>
-    a.eventStart < b.eventStart ? -1 : 1
+    a.eventOffset - b.eventOffset > 0 ? 1 : -1
   );
-  updatedEvents.forEach((event) => {
-    if (
-      !lastStartedEvent ||
-      event.eventStart.getHours() > lastStartedEvent.eventFinish.getHours() ||
-      (event.eventStart.getHours() ===
-        lastStartedEvent.eventFinish.getHours() &&
-        event.eventStart.getMinutes() >=
-          lastStartedEvent.eventFinish.getMinutes())
-    ) {
-      lastStartedEvent = event;
-    } else {
-      if (lastStartedEvent?.isOverlapping) {
-        if (lastStartedEvent.overlapType === CalendarEventOverlapType.LEFT)
-          event.overlapType = CalendarEventOverlapType.RIGHT;
-        else event.overlapType = CalendarEventOverlapType.LEFT;
+
+  updatedEvents.forEach((event, eventIdx) => {
+    if (overlappingEvents.length === 0) {
+      event.overlapIdx = 0;
+      return overlappingEvents.push(event);
+    }
+
+    let firstNullId = -1;
+    let isOverlapping = false;
+
+    overlappingEvents.forEach((overlappingEvent, idx) => {
+      if (overlappingEvent === null) {
+        if (firstNullId === -1) {
+          firstNullId = idx;
+        }
       } else {
-        lastStartedEvent!.isOverlapping = true;
-        lastStartedEvent!.overlapType = CalendarEventOverlapType.LEFT;
-        event.overlapType = CalendarEventOverlapType.RIGHT;
+        if (
+          overlappingEvent.eventOffset + overlappingEvent.eventDuration <
+          event.eventOffset
+        ) {
+          overlappingEvents[idx] = null;
+          if (firstNullId === -1) {
+            firstNullId = idx;
+          }
+        } else {
+          isOverlapping = true;
+        }
       }
+    });
 
-      event.isOverlapping = true;
-
-      if (
-        lastStartedEvent?.eventFinish.getHours() >
-          event.eventFinish.getHours() ||
-        (lastStartedEvent?.eventFinish.getHours() ===
-          event.eventFinish.getHours() &&
-          lastStartedEvent?.eventFinish.getMinutes() >
-            event.eventFinish.getMinutes())
-      ) {
-        lastStartedEvent = event;
+    if (isOverlapping) {
+      if (firstNullId === -1) {
+        event.overlapIdx = overlappingEvents.length;
+        overlappingEvents.push(event);
+      } else {
+        event.overlapIdx = firstNullId;
+        overlappingEvents[firstNullId] = event;
       }
+    } else {
+      for (let i = 0; i < eventIdx; i++) {
+        if (!updatedEvents[i].overlapCount) {
+          updatedEvents[i].overlapCount = overlappingEvents.length;
+        }
+      }
+      event.overlapIdx = 0;
+      overlappingEvents = [event];
+    }
+  });
+
+  updatedEvents.forEach((event) => {
+    if (!event?.overlapCount) {
+      event.overlapCount = overlappingEvents.length;
     }
   });
 
@@ -119,7 +135,7 @@ const CalendarContent = () => {
       calendarData.headersData.push({ dayNumber, dayName });
       calendarData.daysData.push({
         day,
-        events: prepareCalendarEvents(calendarEvents, day),
+        events: prepareCalendarEventsV3(calendarEvents, day),
       });
     }
 
@@ -136,17 +152,11 @@ const CalendarContent = () => {
   };
 
   const getEventClass = (event: CalendarEventData): string => {
-    let className = "";
+    let className;
 
     if (event.eventId === highlightedEvent)
       className = "app__schedule__calendar__event--highlighted";
     else className = "app__schedule__calendar__event";
-
-    if (event.isOverlapping) {
-      if (event.overlapType === CalendarEventOverlapType.LEFT)
-        className += " app__schedule__calendar__event--left";
-      else className += " app__schedule__calendar__event--right";
-    }
 
     return className;
   };
@@ -183,14 +193,16 @@ const CalendarContent = () => {
                 onClick={() => handleEventHighlight(event.eventId)}
                 className={getEventClass(event)}
                 style={{
-                  top:
-                    event.eventStart.getHours() * 60 +
-                    event.eventStart.getMinutes(),
+                  top: event.eventOffset,
                   height: event.eventDuration,
                   backgroundColor: event.backgroundColor,
                   color: event.textColor,
+                  width: `${100 / event.overlapCount!}%`,
+                  left: `${(event.overlapIdx! * 100) / event.overlapCount!}%`,
                 }}
-              />
+              >
+                {event.overlapCount}
+              </div>
             ))}
           </div>
         ))}
