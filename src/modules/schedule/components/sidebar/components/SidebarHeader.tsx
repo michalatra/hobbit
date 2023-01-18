@@ -1,22 +1,26 @@
 import React from "react";
-import {PropsBase} from "../../../../../models/ui/data/PropsBase";
-import {ScheduleDateData} from "../../../../../models/ui/data/ScheduleDateData";
-import {convertMonthName} from "../../../../../converters/MonthNameConverter";
+import { convertMonthName } from "../../../../../converters/MonthNameConverter";
+import { bind } from "@react-rxjs/core";
+import { currentScheduleDate$ } from "../../../../../services/ScheduleService";
 
-interface HeaderProps extends PropsBase {
-    schedule: ScheduleDateData
-}
+const [useCurrentScheduleDate] = bind(currentScheduleDate$);
 
-const SidebarHeader = ({schedule}: HeaderProps) => {
-    return <div>
-        <div className="app__schedule__sidebar-month">{convertMonthName(schedule.month)}</div>
-        <div className="app__schedule__sidebar__week-container">
-            <div>Tydzień:</div>
-            <div className="app__schedule__sidebar__week-range">
-                {schedule.weekStartDay + " - " + schedule.weekFinDay}
-            </div>
+const SidebarHeader = () => {
+  const schedule = useCurrentScheduleDate();
+
+  return (
+    <div>
+      <div className="app__schedule__sidebar-month">
+        {convertMonthName(schedule.month)}
+      </div>
+      <div className="app__schedule__sidebar__week-container">
+        <div>Tydzień:</div>
+        <div className="app__schedule__sidebar__week-range">
+          {schedule.weekStartDay + " - " + schedule.weekFinDay}
         </div>
+      </div>
     </div>
-}
+  );
+};
 
 export default SidebarHeader;
