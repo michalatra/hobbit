@@ -36,7 +36,10 @@ const hourItems: CalendarHourItemData[] = [
   { hour: 23 },
 ];
 
-const prepareCalendarEventsV3 = (events: CalendarEventData[], day: Date) => {
+const prepareCalendarEvents = (
+  events: CalendarEventData[],
+  day: Date
+): CalendarEventData[] => {
   let overlappingEvents: (CalendarEventData | null)[] = [];
 
   let updatedEvents = [...events];
@@ -135,7 +138,7 @@ const CalendarContent = () => {
       calendarData.headersData.push({ dayNumber, dayName });
       calendarData.daysData.push({
         day,
-        events: prepareCalendarEventsV3(calendarEvents, day),
+        events: prepareCalendarEvents(calendarEvents, day),
       });
     }
 
@@ -197,8 +200,11 @@ const CalendarContent = () => {
                   height: event.eventDuration,
                   backgroundColor: event.backgroundColor,
                   color: event.textColor,
-                  width: `${100 / event.overlapCount!}%`,
-                  left: `${(event.overlapIdx! * 100) / event.overlapCount!}%`,
+                  width: `${95 / event.overlapCount!}%`,
+                  left: `${
+                    (event.overlapIdx! * 100) / event.overlapCount! +
+                    5 / event.overlapCount!
+                  }%`,
                 }}
               >
                 {event.overlapCount}
