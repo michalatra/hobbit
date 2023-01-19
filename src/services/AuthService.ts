@@ -4,7 +4,7 @@ import {LoginFormData} from "../models/ui/data/LoginFormData";
 import {navigate} from "./NavigationService";
 import {ApplicationPathEnum} from "../models/ui/enum/ApplicationPathEnum";
 
-const loginState = new BehaviorSubject<LoginStateEnum>(LoginStateEnum.USER_NOT_LOGGED);
+const loginState = new BehaviorSubject<LoginStateEnum>(LoginStateEnum.USER_LOGGED);
 export const loginState$ = loginState.asObservable();
 
 export const handleLogin = (loginData: LoginFormData) => {

@@ -1,0 +1,219 @@
+@import "base.css";
+
+.app__schedule__container {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+.app__schedule__calendar {
+    flex-grow: 1;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+}
+
+.app__schedule__calendar-timeline {
+    padding-top: 4.2rem;
+    padding-right: 0.4rem;
+}
+
+.app__schedule__calendar-timeline-item {
+    color: var(--color-mediumgrey);
+    font-size: 0.9rem;
+    text-align: right;
+    height: 60px;
+}
+
+.app__schedule__sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 15rem;
+}
+
+.app__schedule__sidebar-month {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-white);
+}
+
+.app__schedule__sidebar__week-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 0.6rem 0;
+    color: var(--color-lightgrey);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.app__schedule__sidebar__week-range {
+    color: var(--color-primary);
+    font-size: 1rem;
+    margin: 0 0.6rem;
+}
+
+.app__schedule__sidebar__lectures-title,
+.app__schedule__sidebar__events-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    margin-top: 1rem;
+}
+
+.app__schedule__sidebar__lectures-list,
+.app__schedule__sidebar__events-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0.6rem 0;
+}
+
+.app__schedule__sidebar__lecture,
+.app__schedule__sidebar__lecture--disabled {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.6rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.app__schedule__sidebar__lecture:hover,
+.app__schedule__sidebar__lecture--disabled:hover {
+    background-color: var(--color-background-light);
+}
+
+.app__schedule__sidebar__lecture--disabled > .app__schedule__sidebar__lecture-tag,
+.app__schedule__sidebar__lecture--disabled > .app__schedule__sidebar__lecture-name {
+    opacity: 0.6;
+}
+
+.app__schedule__sidebar__lecture-tag {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+}
+
+.app__schedule__sidebar__lecture-name {
+    font-size: 0.85rem;
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.app__schedule__sidebar-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    padding: 0.6rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+}
+
+.app__schedule__sidebar-footer:hover {
+    background-color: var(--color-background-light);
+}
+
+.app_schedule__sidebar-footer-text {
+    margin-left: 0.5rem;
+}
+
+.app__schedule__calendar__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.app__schedule__calendar__content__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+}
+
+.app__schedule__calendar__content__header__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem;
+    width: 100%;
+}
+
+.app__schedule__calendar__content__header__item__number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-background-black);
+    border-radius: 1.5rem;
+    background-color: var(--color-primary);
+    padding: 0.4rem;
+}
+
+.app__schedule__calendar__content__header__item__name {
+    padding: 0.3rem 0 0 0;
+    color: var(--color-lightgrey);
+    font-size: 0.8rem;
+}
+
+.app__schedule__calendar__content__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex: 1;
+    width: 100%;
+    border-left: 2px solid var(--color-mediumgrey);
+    border-top: 1px solid var(--color-grey);
+}
+
+.app__schedule__calendar__content__column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1;
+    border-right: 1px solid var(--color-grey);
+    position: relative;
+}
+
+.app__schedule__calendar__content__cell {
+    display: flex;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid var(--color-grey);
+}
+
+.app__schedule__calendar__event,
+.app__schedule__calendar__event--highlighted {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    border-radius: 3px;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.app__schedule__calendar__event {
+    z-index: 10;
+}
+
+.app__schedule__calendar__event--highlighted {
+    z-index: 20;
+    scale: 1.1;
+}

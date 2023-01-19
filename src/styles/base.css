@@ -67,29 +67,32 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    max-width: 1366px;
+    /*TODO: Do zastanowienia się co lepiej wygląda*/
+    /*max-width: 1366px;*/
     margin: 0 auto;
     align-content: stretch;
+    min-height: 600px;
 }
 
 .app__global-content-container {
-    flex-grow: 1;
+    height: 100%;
+    /*flex-grow: 1;*/
     overflow: auto;
     display: flex;
     position: relative;
 }
 
 .app__container, .app__container--grow {
-    margin: 1rem;
+    padding: 1rem;
     align-content: stretch;
 }
 
 .app__container--grow {
     display: block;
-    flex-grow: 1;
+    height: 100%;
+    flex: 1;
     justify-content: center;
     align-items: center;
-    height: inherit;
 }
 
 .grid {
@@ -114,10 +117,9 @@ p {
 
 @media screen and (max-width: 768px) {
     .app__container, .app__container--grow {
-        margin: 0.4rem;
+        padding: 0.4rem;
     }
 }
-
 
 /* Utils */
 .app__flex {
