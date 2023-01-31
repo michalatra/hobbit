@@ -3,7 +3,6 @@
 .app__schedule__container {
     display: flex;
     flex-direction: row;
-    align-content: stretch;
     height: 100%;
     overflow: hidden;
     border-radius: var(--border-radius);
@@ -27,6 +26,13 @@
     font-size: 0.9rem;
     text-align: right;
     height: 60px;
+}
+
+@media screen and (max-width: 768px) {
+    .app__schedule__calendar {
+        margin: 0;
+}
+
 }
 
 .app__schedule__sidebar {

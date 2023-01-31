@@ -108,6 +108,7 @@
 @media screen and (max-width: 768px) {
     .app__navbar {
         flex-wrap: wrap;
+        padding: 0.2rem 0.6rem;
     }
 
     .app__navbar__content, .app__navbar__content--logged {

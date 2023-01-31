@@ -8,6 +8,7 @@ import {
 import { DayNameConverter } from "../../../../../models/ui/enum/DayNameConverter";
 import { CalendarHourItemData } from "../../../../../models/ui/data/CalendarHourItemData";
 import { CalendarEventData } from "../../../../../models/ui/data/CalendarEventData";
+import { useWindowDimensions } from "../../../../../hooks/useWindowDimensions";
 
 const hourItems: CalendarHourItemData[] = [
   { hour: 0 },
@@ -111,10 +112,12 @@ const [useCurrentScheduleDate] = bind(currentScheduleDate$);
 const [useCalendarEvents] = bind(calendarEvents$);
 
 const CalendarContent = () => {
+  const [windowWidth] = useWindowDimensions();
   const currentScheduleDate = useCurrentScheduleDate();
   const calendarEvents = useCalendarEvents();
   const [calendarData, setCalendarData] = useState<CalendarData>();
   const [highlightedEvent, setHighlightedEvent] = useState<string>();
+  const [mobileView, setMobileView] = useState<boolean>(false);
   const generateCalendarContent = (): CalendarData => {
     const startDate = new Date(
       currentScheduleDate.year,
@@ -127,7 +130,13 @@ const CalendarContent = () => {
       daysData: [],
     };
 
-    for (let i = 0; i < 5; i++) {
+    const numberOfDays = mobileView ? 1 : 5;
+
+    if (mobileView) {
+      startDate.setDate(new Date().getDate());
+    }
+
+    for (let i = 0; i < numberOfDays; i++) {
       const day = new Date(startDate);
       day.setDate(day.getDate() + i);
 
@@ -147,7 +156,15 @@ const CalendarContent = () => {
 
   useEffect(() => {
     setCalendarData(generateCalendarContent());
-  }, [currentScheduleDate]);
+  }, [currentScheduleDate, mobileView]);
+
+  useEffect(() => {
+    if (windowWidth <= 768 && !mobileView) {
+      setMobileView(true);
+    } else if (windowWidth > 768 && mobileView) {
+      setMobileView(false);
+    }
+  }, [windowWidth]);
 
   const handleEventHighlight = (eventId: string) => {
     if (highlightedEvent === eventId) setHighlightedEvent(undefined);
